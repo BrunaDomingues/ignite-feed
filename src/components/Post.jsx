@@ -1,20 +1,35 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR  from 'date-fns/locale/pt-BR'
 import styles from './Post.module.css';
 import { Comment } from './Comment'; 
 import { Avatar } from './Avatar';
-export function Post(){
+export function Post({author, publishedAt, content}){
+    const publishedDateFormated = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBR});
+    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true
+    })
     return(
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src="https://github.com/BrunaDomingues.png/" />
+                    <Avatar src={author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>Bruna Domingues</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
-                <time title='11 de maio às 08:13' dateTime='2022-05-11 08:13:30'>Publicado há 1h</time>
+                <time title={publishedDateFormated} dateTime={publishedAt.toISOString()}>{publishedDateRelativeToNow}</time>
             </header>
             <div className={styles.content}>
+                {content.map(line => {
+                    if(line.type=='paragraph'){
+                        return <p>{line.content}</p>
+                    }  else if(line.type=='link'){
+                        return <p><a href='#'>{line.content}</a></p>
+                    }
+                    return <Post author={post.author} content={post.content} publishedAt={post.publishedAt} key={post.id}/>
+                })}
                 <p>Fala galeraa 👋</p>
                 <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
                 <p>👉{' '}<a href="">jane.design/doctorcare</a></p>
