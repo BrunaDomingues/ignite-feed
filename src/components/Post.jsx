@@ -3,12 +3,33 @@ import ptBR  from 'date-fns/locale/pt-BR'
 import styles from './Post.module.css';
 import { Comment } from './Comment'; 
 import { Avatar } from './Avatar';
+import { useState } from 'react';
 export function Post({author, publishedAt, content}){
+    const [comments, setComments] = useState(['Muito bom Devon, parabéns!! 👏👏']);
     const publishedDateFormated = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", { locale: ptBR});
     const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
         locale: ptBR,
         addSuffix: true
     })
+    const [newCommentText, setNewCommentText] = useState('');
+    function handleCreateNewComment(){
+        event.preventDefault();
+        setComments([...comments,newCommentText]);
+        setNewCommentText('');
+    }
+    function handleNewCommentChange(){
+        event.target.setCustomValidity('');
+        setNewCommentText(event.target.value);
+    }
+    function handleNewCommentInvalid(){
+        event.target.setCustomValidity('Esse campo é obrigatório!');
+    }
+    function deleteComment(commentToDelete){
+        const commentsWithoutDeleteOne = comments.filter(comment => {
+            return comment != commentToDelete;
+        })
+        setComments(commentsWithoutDeleteOne);
+    }
     return(
         <article className={styles.post}>
             <header>
@@ -24,32 +45,30 @@ export function Post({author, publishedAt, content}){
             <div className={styles.content}>
                 {content.map(line => {
                     if(line.type=='paragraph'){
-                        return <p>{line.content}</p>
+                        return <p key={line.content}>{line.content}</p>
                     }  else if(line.type=='link'){
-                        return <p><a href='#'>{line.content}</a></p>
+                        return <p key={line.content}><a href='#'>{line.content}</a></p>
                     }
-                    return <Post author={post.author} content={post.content} publishedAt={post.publishedAt} key={post.id}/>
                 })}
-                <p>Fala galeraa 👋</p>
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-                <p>👉{' '}<a href="">jane.design/doctorcare</a></p>
                 <p>
                     <a href="">#novoprojeto</a>{' '}
                     <a href="">#nlw</a>{' '}
                     <a href="">#rocketseat</a>
                 </p>
             </div>
-            <form className={styles.commentForm}>
+            <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
-                <textarea placeholder='Deixe um comentário'/>
+                <textarea name="comment" placeholder='Deixe um comentário' onChange={handleNewCommentChange} value={newCommentText} onInvalid={handleNewCommentInvalid} required/>
                 <footer>
-                    <button type='submit'>Publicar</button>
+                    <button type='submit' disabled={newCommentText.length==0}>Publicar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>
-                <Comment/>
-                <Comment/>
-                <Comment/>
+                {comments.map(
+                    comment => {
+                        return <Comment key={comment} content={comment} onDeleteComment={deleteComment}/>;
+                    }
+                )}
             </div>
         </article>
     )

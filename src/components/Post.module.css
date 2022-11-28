@@ -83,6 +83,10 @@
 .commentForm button:hover {
     background: var(--green-300);
 }
+.commentForm button:disabled {
+    background: var(--green-500);
+    opacity: .6;
+}
 .commentForm footer {
     visibility: hidden;
     max-height: 0;
