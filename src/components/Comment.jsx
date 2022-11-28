@@ -11,9 +11,7 @@ export function Comment({content, onDeleteComment}) {
         setLikeCount((state)=>{
             return state + 1;
         });
-        setLikeCount((state)=>{
-            return state + 1;
-        });
+        //atualizar info dependendo da informação anterior fazer assim
     }
     return(
         <div className={styles.comment}>
