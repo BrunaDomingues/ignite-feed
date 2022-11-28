@@ -7,9 +7,9 @@ export function Comment({content, onDeleteComment}) {
     function handleDeleteComment() {
         onDeleteComment(content);
     }
-    function handleLikeComment(){
+    /*function handleLikeComment(){
         setLikeCount(likeCount+1);
-    }
+    }*/
     return(
         <div className={styles.comment}>
             <Avatar hasBorder={false} src="https://github.com/BrunaDomingues.png/"/>
@@ -25,7 +25,7 @@ export function Comment({content, onDeleteComment}) {
                     <p>{content}</p>
                 </div>
                 <footer>
-                    <button onClick={handleLikeComment}><ThumbsUp/> Aplaudir <span>{likeCount}</span></button>
+                    <button onClick={ ()=> setLikeCount(likeCount+1)}><ThumbsUp/> Aplaudir <span>{likeCount}</span></button>
                 </footer>
             </div>
         </div>
