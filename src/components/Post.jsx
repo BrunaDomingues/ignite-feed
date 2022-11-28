@@ -30,6 +30,7 @@ export function Post({author, publishedAt, content}){
         })
         setComments(commentsWithoutDeleteOne);
     }
+    const isNewCommentEmpty = newCommentText.length==0;
     return(
         <article className={styles.post}>
             <header>
@@ -60,7 +61,7 @@ export function Post({author, publishedAt, content}){
                 <strong>Deixe seu feedback</strong>
                 <textarea name="comment" placeholder='Deixe um comentário' onChange={handleNewCommentChange} value={newCommentText} onInvalid={handleNewCommentInvalid} required/>
                 <footer>
-                    <button type='submit' disabled={newCommentText.length==0}>Publicar</button>
+                    <button type='submit' disabled={isNewCommentEmpty}>Publicar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>

@@ -80,12 +80,12 @@
     cursor: pointer;
     transition: background-color .1s;
 }
-.commentForm button:hover {
+.commentForm button[type=submit]:not(:disabled):hover {
     background: var(--green-300);
 }
-.commentForm button:disabled {
-    background: var(--green-500);
+.commentForm button[type=submit]:disabled {
     opacity: .6;
+    cursor: not-allowed;
 }
 .commentForm footer {
     visibility: hidden;
