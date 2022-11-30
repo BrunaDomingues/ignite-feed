@@ -12,7 +12,7 @@ Você precisa instalar o [Node.js](https://nodejs.org/en/download/) para executa
 # Clone o projeto e acesse a pasta
 
 ```$ git clone https://github.com/BrunaDomingues/ignite-feed.git```
-#Siga os passos abaixo
+# Siga os passos abaixo
 
 ```
 # Install the dependencies
