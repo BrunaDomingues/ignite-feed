@@ -9,7 +9,8 @@ Construindo em React JS um feed de posts, aplicando o que estou aprendendo no cu
 # 💻 Getting started
 Requisitos
 Você precisa instalar o [Node.js](https://nodejs.org/en/download/) para executar este projeto.
-#Clone o projeto e acesse a pasta
+# Clone o projeto e acesse a pasta
+
 ```$ git clone https://github.com/BrunaDomingues/ignite-feed.git```
 #Siga os passos abaixo
 
