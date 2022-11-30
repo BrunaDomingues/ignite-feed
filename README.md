@@ -19,7 +19,7 @@ Você precisa instalar o [Node.js](https://nodejs.org/en/download/) para executa
 $ npm
 
 # Run the web server
-$ npm dev
+$ npm run dev
 ```
 O aplicativo estará disponível para acesso em seu navegador em ```http://localhost:3000```
 
