@@ -22,4 +22,6 @@ $ npm
 $ npm dev
 ```
 O aplicativo estará disponível para acesso em seu navegador em ```http://localhost:3000```
+
+
 Feito com💜por Bruna Domingues Leite 👋 Confira meu [LinkedIn](https://www.linkedin.com/in/bruna-domingues-leite/)
